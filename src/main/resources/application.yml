@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: "library"
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: Password
+    url: jdbc:postgresql://localhost:5432/library
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        cache:
+          use_second_level_cache: true
+          region.factory_class: org.hibernate.cache.jcache.JCacheRegionFactory
+          use_query_cache: true
+        javax.cache.provider: com.github.benmanes.caffeine.jcache.spi.CaffeineCachingProvider
+        javax.cache.missing_cache_strategy: create
+    security:
+      oauth2:
+        resourceserver:
+          jwt:
+            issuer-uri: http://localhost:8080
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  error:
+    whitelabel:
+      enabled: false
+
+logging:
+  level:
+    root: INFO
+    online_store: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+  file:
+    name: logs/app.log
+
+token:
+  signing:
+    key: 7C2F6A4D9B1E5F3A8D7C4E6B2A1D5F374C8E9A2D6F5B3C7E1A4D9F2B6C8E5
