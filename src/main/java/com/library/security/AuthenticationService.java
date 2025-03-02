@@ -1,29 +1,28 @@
 package com.library.security;
 
-
-import com.library.dto.UserDto;
 import com.library.entity.Role;
 import com.library.entity.User;
-import com.library.mapper.UserMapper;
-import com.library.service.UserService;
+import com.library.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-    private final UserService userService;
+
+    private final SecurityUserDetailsService userDetailsService;
     private final JwtTokenService jwtService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
-    private final UserMapper userMapper;
+    private final UserRepository userRepository;
 
-
+    @Transactional
     public JwtAuthenticationResponse signUp(SignUpRequest request) {
-
         var user = User.builder()
                 .username(request.getUsername())
                 .email(request.getEmail())
@@ -31,26 +30,26 @@ public class AuthenticationService {
                 .role(Role.ROLE_USER)
                 .build();
 
-        UserDto userDto = userMapper.toDto(user);
+        User savedUser = userRepository.save(user);
 
-        userService.addUser(userDto);
+        UserDetails userDetails = new SecurityUser(savedUser);
 
-        var jwt = jwtService.generateToken(user);
+        var jwt = jwtService.generateToken(userDetails);
+
         return new JwtAuthenticationResponse(jwt);
     }
 
-
     public JwtAuthenticationResponse signIn(SignInRequest request) {
+
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 request.getUsername(),
                 request.getPassword()
         ));
 
-        var user = userService
-                .userDetailsService()
-                .loadUserByUsername(request.getUsername());
+        UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
 
-        var jwt = jwtService.generateToken(user);
+        var jwt = jwtService.generateToken(userDetails);
+
         return new JwtAuthenticationResponse(jwt);
     }
 }
