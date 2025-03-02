@@ -6,8 +6,6 @@ import com.library.mapper.UserMapper;
 import com.library.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -74,20 +72,6 @@ public class UserService {
         log.info("Deleted user with ID: {}", userId);
     }
 
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> {
-                    log.error("User with username: {} not found", username);
-                    return new NoSuchElementException("User with username: " + username + " not found");
-                });
-    }
 
-    public UserDetailsService userDetailsService() {
-        return this::findByUsername;
-    }
 
-    public User getCurrentUser() {
-        var username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return findByUsername(username);
-    }
 }
