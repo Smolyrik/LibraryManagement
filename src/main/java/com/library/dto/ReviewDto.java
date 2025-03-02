@@ -2,12 +2,20 @@ package com.library.dto;
 
 
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ReviewDto {
 
-    private Long reviewId;
+    private Integer reviewId;
 
     @NotNull(message = "User Id must not be null")
     private Integer userId;

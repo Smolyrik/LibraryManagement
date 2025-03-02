@@ -20,7 +20,7 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "author_id", updatable = false, nullable = false, unique = true)
-    private Integer id;
+    private Integer authorId;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;

@@ -3,7 +3,6 @@ package com.library.mapper;
 import com.library.dto.AuthorDto;
 import com.library.entity.Author;
 import org.mapstruct.Mapper;
-import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface AuthorMapper {
@@ -12,7 +11,4 @@ public interface AuthorMapper {
 
     Author toEntity(AuthorDto authorDto);
 
-    List<AuthorDto> toDtoList(List<Author> authors);
-
-    List<Author> toEntityList(List<AuthorDto> authorDtos);
 }

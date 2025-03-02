@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AuthorDto {
 
-    private Integer id;
+    private Integer authorId;
 
     @NotNull(message = "First name must not be null")
     @Size(min = 1, max = 50, message = "First name must be between 1 and 50 characters")

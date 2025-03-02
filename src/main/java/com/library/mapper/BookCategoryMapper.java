@@ -2,9 +2,10 @@ package com.library.mapper;
 
 import com.library.dto.BookCategoryDto;
 import com.library.entity.BookCategory;
-import org.mapstruct.*;
+import com.library.entity.BookCategoryId;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface BookCategoryMapper {
@@ -15,11 +16,10 @@ public interface BookCategoryMapper {
 
     @Mapping(source = "bookId", target = "book.bookId")
     @Mapping(source = "categoryId", target = "category.categoryId")
-    @Mapping(target = "id", expression = "java(new BookCategoryId(bookCategoryDto.getBookId(), bookCategoryDto.getCategoryId()))")
+    @Mapping(target = "id", expression = "java(mapToId(bookCategoryDto.getBookId(), bookCategoryDto.getCategoryId()))")
     BookCategory toEntity(BookCategoryDto bookCategoryDto);
 
-    List<BookCategoryDto> toDtoList(List<BookCategory> bookCategories);
-
-    List<BookCategory> toEntityList(List<BookCategoryDto> bookCategoryDtos);
-
+    default BookCategoryId mapToId(Integer bookId, Integer categoryId) {
+        return new BookCategoryId(bookId, categoryId);
+    }
 }

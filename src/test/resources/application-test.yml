@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: "library"
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+        enable_lazy_load_no_trans: true
+        cache:
+          use_second_level_cache: false
+          use_query_cache: false
+
+server:
+  port: 8083
+  servlet:
+    context-path: /
+  error:
+    whitelabel:
+      enabled: false
+
+
+logging:
+  level:
+    root: INFO
+    online_store: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+
+token:
+  signing:
+    key: 7C2F6A4D9B1E5F3A8D7C4E6B2A1D5F374C8E9A2D6F5B3C7E1A4D9F2B6C8E5

@@ -71,7 +71,4 @@ public class UserService {
         userRepository.deleteById(userId);
         log.info("Deleted user with ID: {}", userId);
     }
-
-
-
 }

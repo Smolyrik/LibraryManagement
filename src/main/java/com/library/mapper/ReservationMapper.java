@@ -2,9 +2,8 @@ package com.library.mapper;
 
 import com.library.dto.ReservationDto;
 import com.library.entity.Reservation;
-import org.mapstruct.*;
-
-import java.util.List;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface ReservationMapper {
@@ -17,6 +16,4 @@ public interface ReservationMapper {
     @Mapping(source = "bookId", target = "book.bookId")
     Reservation toEntity(ReservationDto reservationDto);
 
-    List<ReservationDto> toDtoList(List<Reservation> reservations);
-    List<Reservation> toEntityList(List<ReservationDto> reservationDtos);
 }

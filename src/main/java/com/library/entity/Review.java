@@ -22,7 +22,7 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id", updatable = false, unique = true, nullable = false)
-    private Long reviewId;
+    private Integer reviewId;
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id",

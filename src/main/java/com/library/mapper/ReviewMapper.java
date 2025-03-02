@@ -2,9 +2,8 @@ package com.library.mapper;
 
 import com.library.dto.ReviewDto;
 import com.library.entity.Review;
-import org.mapstruct.*;
-
-import java.util.List;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface ReviewMapper {
@@ -17,6 +16,4 @@ public interface ReviewMapper {
     @Mapping(source = "bookId", target = "book.bookId")
     Review toEntity(ReviewDto reviewDto);
 
-    List<ReviewDto> toDtoList(List<Review> reviews);
-    List<Review> toEntityList(List<ReviewDto> reviewDtos);
 }
