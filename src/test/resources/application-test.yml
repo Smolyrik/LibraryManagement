@@ -19,6 +19,9 @@ spring:
           use_second_level_cache: false
           use_query_cache: false
 
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
 server:
   port: 8083
   servlet:

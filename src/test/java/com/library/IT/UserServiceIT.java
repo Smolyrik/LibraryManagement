@@ -28,7 +28,7 @@ public class UserServiceIT {
     private UserService userService;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private UserMapper userMapper;

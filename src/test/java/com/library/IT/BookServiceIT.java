@@ -36,18 +36,25 @@ public class BookServiceIT {
 
     @Autowired
     private BookMapper bookMapper;
+
     @Autowired
     private CategoryRepository categoryRepository;
+
     @Autowired
     private CategoryMapper categoryMapper;
+
     @Autowired
     private AuthorMapper authorMapper;
+
     @Autowired
     private AuthorService authorService;
+
     @Autowired
     private BookAuthorService bookAuthorService;
+
     @Autowired
     private CategoryService categoryService;
+
     @Autowired
     private BookCategoryService bookCategoryService;
 
