@@ -78,7 +78,7 @@ public class LoanService {
     }
 
     @Transactional
-    public Loan loanBook(Integer userId, Integer bookId, Integer loanTime) {
+    public LoanDto loanBook(Integer userId, Integer bookId, Integer loanTime) {
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new RuntimeException("Book with ID: " + bookId + " not found"));
         if (book.getAvailableCopies() <= 0) {
@@ -94,7 +94,7 @@ public class LoanService {
 
         book.setAvailableCopies(book.getAvailableCopies() - 1);
         bookRepository.save(book);
-        return loanRepository.save(loan);
+        return loanMapper.toDto(loanRepository.save(loan));
     }
 
     @Transactional

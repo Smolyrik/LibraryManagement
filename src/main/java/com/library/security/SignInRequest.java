@@ -7,11 +7,11 @@ import lombok.Data;
 @Data
 public class SignInRequest {
 
-    @Size(min = 5, max = 50, message = "Имя пользователя должно содержать от 5 до 50 символов")
-    @NotBlank(message = "Имя пользователя не может быть пустыми")
+    @Size(min = 5, max = 50, message = "Username must be between 5 and 50 characters")
+    @NotBlank(message = "Username cannot be empty")
     private String username;
 
-    @Size(min = 8, max = 255, message = "Длина пароля должна быть от 8 до 255 символов")
-    @NotBlank(message = "Пароль не может быть пустыми")
+    @Size(min = 8, max = 255, message = "Password length must be between 8 and 255 characters")
+    @NotBlank(message = "Password cannot be empty")
     private String password;
 }

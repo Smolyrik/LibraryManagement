@@ -7,7 +7,6 @@ import com.library.entity.Book;
 import com.library.entity.Role;
 import com.library.entity.User;
 import com.library.mapper.BookMapper;
-import com.library.mapper.LoanMapper;
 import com.library.mapper.UserMapper;
 import com.library.repository.BookRepository;
 import com.library.repository.LoanRepository;
@@ -40,8 +39,6 @@ public class LoanServiceIT {
     private UserService userService;
     @Autowired
     private BookService bookService;
-    @Autowired
-    private LoanMapper loanMapper;
     @Autowired
     private BookMapper bookMapper;
     @Autowired
@@ -180,7 +177,7 @@ public class LoanServiceIT {
         UserDto user = createTestUser("loanUser");
         BookDto book = createTestBook("loanBook");
 
-        LoanDto loan = loanMapper.toDto(loanService.loanBook(user.getUserId(), book.getBookId(), 7));
+        LoanDto loan = loanService.loanBook(user.getUserId(), book.getBookId(), 7);
 
         assertNotNull(loan);
         assertEquals(user.getUserId(), loan.getUserId());
@@ -209,7 +206,7 @@ public class LoanServiceIT {
         UserDto user = createTestUser("returnUser");
         BookDto book = createTestBook("returnBook");
 
-        LoanDto loan = loanMapper.toDto(loanService.loanBook(user.getUserId(), book.getBookId(), 7));
+        LoanDto loan = loanService.loanBook(user.getUserId(), book.getBookId(), 7);
         assertTrue(loanService.returnBook(loan.getLoanId()));
     }
 
