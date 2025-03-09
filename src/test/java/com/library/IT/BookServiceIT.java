@@ -11,12 +11,17 @@ import com.library.repository.BookRepository;
 import com.library.repository.CategoryRepository;
 import com.library.service.*;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -26,6 +31,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ExtendWith(SpringExtension.class)
+@Testcontainers
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class BookServiceIT {
 
     @Autowired
@@ -58,10 +65,25 @@ public class BookServiceIT {
     @Autowired
     private BookCategoryService bookCategoryService;
 
+    @Container
+    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16.0")
+            .withDatabaseName("testdb")
+            .withUsername("test")
+            .withPassword("test");
+
+    @BeforeAll
+    static void setup() {
+        System.setProperty("spring.datasource.url", postgres.getJdbcUrl());
+        System.setProperty("spring.datasource.username", postgres.getUsername());
+        System.setProperty("spring.datasource.password", postgres.getPassword());
+    }
+
     @AfterEach
     public void cleanUp() {
         bookRepository.deleteAll();
+        bookRepository.flush();
         categoryRepository.deleteAll();
+        categoryRepository.flush();
     }
 
     private CategoryDto addCategory() {

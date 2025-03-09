@@ -15,12 +15,17 @@ import com.library.service.BookService;
 import com.library.service.LoanService;
 import com.library.service.UserService;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -31,6 +36,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ExtendWith(SpringExtension.class)
+@Testcontainers
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class LoanServiceIT {
 
     @Autowired
@@ -50,11 +57,27 @@ public class LoanServiceIT {
     @Autowired
     private UserRepository userRepository;
 
+    @Container
+    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16.0")
+            .withDatabaseName("testdb")
+            .withUsername("test")
+            .withPassword("test");
+
+    @BeforeAll
+    static void setup() {
+        System.setProperty("spring.datasource.url", postgres.getJdbcUrl());
+        System.setProperty("spring.datasource.username", postgres.getUsername());
+        System.setProperty("spring.datasource.password", postgres.getPassword());
+    }
+
     @AfterEach
     public void cleanUp() {
         loanRepository.deleteAll();
+        loanRepository.flush();
         bookRepository.deleteAll();
+        bookRepository.flush();
         userRepository.deleteAll();
+        userRepository.flush();
     }
 
     private UserDto createTestUser(String username) {
