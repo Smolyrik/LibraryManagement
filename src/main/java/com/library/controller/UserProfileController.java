@@ -1,7 +1,7 @@
 package com.library.controller;
 
 import com.library.dto.UserProfileDto;
-import com.library.service.UserProfileService;
+import com.library.service.impl.UserProfileServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserProfileController {
 
-    private final UserProfileService userProfileService;
+    private final UserProfileServiceImpl userProfileService;
 
     @PostMapping
     public ResponseEntity<UserProfileDto> addUserProfile(@Valid @RequestBody UserProfileDto userProfileDto) {

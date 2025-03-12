@@ -9,12 +9,9 @@ import com.library.mapper.UserMapper;
 import com.library.mapper.UserProfileMapper;
 import com.library.repository.UserProfileRepository;
 import com.library.repository.UserRepository;
-import com.library.service.UserProfileService;
-import com.library.service.UserService;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import com.library.service.impl.UserProfileServiceImpl;
+import com.library.service.impl.UserServiceImpl;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -37,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserProfileServiceIT {
 
     @Autowired
-    private UserProfileService userProfileService;
+    private UserProfileServiceImpl userProfileService;
 
     @Autowired
     private UserProfileRepository userProfileRepository;
@@ -52,7 +49,7 @@ public class UserProfileServiceIT {
     private UserProfileMapper userProfileMapper;
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Container
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16.0")
@@ -65,6 +62,11 @@ public class UserProfileServiceIT {
         System.setProperty("spring.datasource.url", postgres.getJdbcUrl());
         System.setProperty("spring.datasource.username", postgres.getUsername());
         System.setProperty("spring.datasource.password", postgres.getPassword());
+    }
+
+    @AfterAll
+    static void teardown() {
+        postgres.stop();
     }
 
     @AfterEach

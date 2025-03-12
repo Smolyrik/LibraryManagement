@@ -9,6 +9,7 @@ import com.library.mapper.BookCategoryMapper;
 import com.library.repository.BookCategoryRepository;
 import com.library.repository.BookRepository;
 import com.library.repository.CategoryRepository;
+import com.library.service.impl.BookCategoryServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,7 +38,7 @@ class BookCategoryServiceTest {
     private BookCategoryMapper bookCategoryMapper;
 
     @InjectMocks
-    private BookCategoryService bookCategoryService;
+    private BookCategoryServiceImpl bookCategoryService;
 
     private Book book;
     private Category category;

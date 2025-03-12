@@ -4,6 +4,7 @@ import com.library.dto.BookDto;
 import com.library.entity.Book;
 import com.library.mapper.BookMapper;
 import com.library.repository.BookRepository;
+import com.library.service.impl.BookServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +27,7 @@ class BookServiceTest {
     private BookMapper bookMapper;
 
     @InjectMocks
-    private BookService bookService;
+    private BookServiceImpl bookService;
 
     private Book book;
     private BookDto bookDto;

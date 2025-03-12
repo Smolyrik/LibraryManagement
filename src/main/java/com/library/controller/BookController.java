@@ -1,7 +1,7 @@
 package com.library.controller;
 
 import com.library.dto.BookDto;
-import com.library.service.BookService;
+import com.library.service.impl.BookServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookController {
 
-    private final BookService bookService;
+    private final BookServiceImpl bookService;
 
     @PostMapping
     public ResponseEntity<BookDto> addBook(@Valid @RequestBody BookDto bookDto) {

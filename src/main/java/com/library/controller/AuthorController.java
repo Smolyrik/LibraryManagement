@@ -1,7 +1,7 @@
 package com.library.controller;
 
 import com.library.dto.AuthorDto;
-import com.library.service.AuthorService;
+import com.library.service.impl.AuthorServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AuthorController {
 
-    private final AuthorService authorService;
+    private final AuthorServiceImpl authorService;
 
     @PostMapping
     public ResponseEntity<AuthorDto> addAuthor(@RequestBody AuthorDto authorDto) {

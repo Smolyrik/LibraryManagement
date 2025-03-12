@@ -4,11 +4,8 @@ import com.library.dto.CategoryDto;
 import com.library.entity.Category;
 import com.library.mapper.CategoryMapper;
 import com.library.repository.CategoryRepository;
-import com.library.service.CategoryService;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import com.library.service.impl.CategoryServiceImpl;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -31,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CategoryServiceIT {
 
     @Autowired
-    private CategoryService categoryService;
+    private CategoryServiceImpl categoryService;
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -50,6 +47,11 @@ public class CategoryServiceIT {
         System.setProperty("spring.datasource.url", postgres.getJdbcUrl());
         System.setProperty("spring.datasource.username", postgres.getUsername());
         System.setProperty("spring.datasource.password", postgres.getPassword());
+    }
+
+    @AfterAll
+    static void teardown() {
+        postgres.stop();
     }
 
     @AfterEach

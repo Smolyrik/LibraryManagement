@@ -4,6 +4,7 @@ import com.library.dto.CategoryDto;
 import com.library.entity.Category;
 import com.library.mapper.CategoryMapper;
 import com.library.repository.CategoryRepository;
+import com.library.service.impl.CategoryServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +27,7 @@ class CategoryServiceTest {
     private CategoryMapper categoryMapper;
 
     @InjectMocks
-    private CategoryService categoryService;
+    private CategoryServiceImpl categoryService;
 
     private Category category;
     private CategoryDto categoryDto;

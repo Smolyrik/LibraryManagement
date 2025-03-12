@@ -11,13 +11,10 @@ import com.library.mapper.UserMapper;
 import com.library.repository.BookRepository;
 import com.library.repository.LoanRepository;
 import com.library.repository.UserRepository;
-import com.library.service.BookService;
-import com.library.service.LoanService;
-import com.library.service.UserService;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import com.library.service.impl.BookServiceImpl;
+import com.library.service.impl.LoanServiceImpl;
+import com.library.service.impl.UserServiceImpl;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -41,11 +38,11 @@ import static org.junit.jupiter.api.Assertions.*;
 public class LoanServiceIT {
 
     @Autowired
-    private LoanService loanService;
+    private LoanServiceImpl loanService;
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
     @Autowired
-    private BookService bookService;
+    private BookServiceImpl bookService;
     @Autowired
     private BookMapper bookMapper;
     @Autowired
@@ -68,6 +65,11 @@ public class LoanServiceIT {
         System.setProperty("spring.datasource.url", postgres.getJdbcUrl());
         System.setProperty("spring.datasource.username", postgres.getUsername());
         System.setProperty("spring.datasource.password", postgres.getPassword());
+    }
+
+    @AfterAll
+    static void teardown() {
+        postgres.stop();
     }
 
     @AfterEach

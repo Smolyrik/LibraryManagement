@@ -9,6 +9,7 @@ import com.library.mapper.BookAuthorMapper;
 import com.library.repository.AuthorRepository;
 import com.library.repository.BookAuthorRepository;
 import com.library.repository.BookRepository;
+import com.library.service.impl.BookAuthorServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,7 +38,7 @@ class BookAuthorServiceTest {
     private BookAuthorMapper bookAuthorMapper;
 
     @InjectMocks
-    private BookAuthorService bookAuthorService;
+    private BookAuthorServiceImpl bookAuthorService;
 
     private Book book;
     private Author author;

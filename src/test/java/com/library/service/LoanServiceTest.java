@@ -7,6 +7,7 @@ import com.library.entity.LoanStatus;
 import com.library.entity.User;
 import com.library.mapper.LoanMapper;
 import com.library.repository.LoanRepository;
+import com.library.service.impl.LoanServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,7 +31,7 @@ class LoanServiceTest {
     private LoanMapper loanMapper;
 
     @InjectMocks
-    private LoanService loanService;
+    private LoanServiceImpl loanService;
 
     private Loan loan;
     private LoanDto loanDto;

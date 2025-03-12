@@ -1,7 +1,7 @@
 package com.library.controller;
 
 import com.library.dto.UserDto;
-import com.library.service.UserService;
+import com.library.service.impl.UserServiceImpl;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
     @PostMapping
     public ResponseEntity<UserDto> addUser(@Valid @RequestBody UserDto userDto) {

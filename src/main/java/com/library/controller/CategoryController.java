@@ -1,7 +1,7 @@
 package com.library.controller;
 
 import com.library.dto.CategoryDto;
-import com.library.service.CategoryService;
+import com.library.service.impl.CategoryServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CategoryController {
 
-    private final CategoryService categoryService;
+    private final CategoryServiceImpl categoryService;
 
     @PostMapping
     public ResponseEntity<CategoryDto> addCategory(@Valid @RequestBody CategoryDto categoryDto) {

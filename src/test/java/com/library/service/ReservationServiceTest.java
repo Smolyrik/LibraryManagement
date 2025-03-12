@@ -4,6 +4,7 @@ import com.library.dto.ReservationDto;
 import com.library.entity.Reservation;
 import com.library.mapper.ReservationMapper;
 import com.library.repository.ReservationRepository;
+import com.library.service.impl.ReservationServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +27,7 @@ class ReservationServiceTest {
     private ReservationMapper reservationMapper;
 
     @InjectMocks
-    private ReservationService reservationService;
+    private ReservationServiceImpl reservationService;
 
     private Reservation reservation;
     private ReservationDto reservationDto;

@@ -4,6 +4,7 @@ import com.library.dto.ReviewDto;
 import com.library.entity.Review;
 import com.library.mapper.ReviewMapper;
 import com.library.repository.ReviewRepository;
+import com.library.service.impl.ReviewServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,7 +29,7 @@ class ReviewServiceTest {
     private ReviewMapper reviewMapper;
 
     @InjectMocks
-    private ReviewService reviewService;
+    private ReviewServiceImpl reviewService;
 
     private ReviewDto reviewDto;
     private Review review;

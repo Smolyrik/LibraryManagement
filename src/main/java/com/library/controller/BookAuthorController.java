@@ -1,7 +1,7 @@
 package com.library.controller;
 
 import com.library.dto.BookAuthorDto;
-import com.library.service.BookAuthorService;
+import com.library.service.impl.BookAuthorServiceImpl;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class BookAuthorController {
 
-    private final BookAuthorService bookAuthorService;
+    private final BookAuthorServiceImpl bookAuthorService;
 
     @PostMapping
     public ResponseEntity<BookAuthorDto> addBookAuthor(@Valid @RequestBody BookAuthorDto bookAuthorDto) {

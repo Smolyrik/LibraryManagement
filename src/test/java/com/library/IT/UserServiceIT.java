@@ -5,11 +5,8 @@ import com.library.entity.Role;
 import com.library.entity.User;
 import com.library.mapper.UserMapper;
 import com.library.repository.UserRepository;
-import com.library.service.UserService;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import com.library.service.impl.UserServiceImpl;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -32,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserServiceIT {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Autowired
     private UserRepository userRepository;
@@ -51,6 +48,11 @@ public class UserServiceIT {
         System.setProperty("spring.datasource.url", postgres.getJdbcUrl());
         System.setProperty("spring.datasource.username", postgres.getUsername());
         System.setProperty("spring.datasource.password", postgres.getPassword());
+    }
+
+    @AfterAll
+    static void teardown() {
+        postgres.stop();
     }
 
     @AfterEach

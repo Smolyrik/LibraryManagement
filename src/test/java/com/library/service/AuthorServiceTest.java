@@ -4,6 +4,7 @@ import com.library.dto.AuthorDto;
 import com.library.entity.Author;
 import com.library.mapper.AuthorMapper;
 import com.library.repository.AuthorRepository;
+import com.library.service.impl.AuthorServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +27,7 @@ class AuthorServiceTest {
     private AuthorMapper authorMapper;
 
     @InjectMocks
-    private AuthorService authorService;
+    private AuthorServiceImpl authorService;
 
     private Author author;
     private AuthorDto authorDto;

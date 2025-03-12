@@ -4,6 +4,7 @@ import com.library.dto.UserProfileDto;
 import com.library.entity.UserProfile;
 import com.library.mapper.UserProfileMapper;
 import com.library.repository.UserProfileRepository;
+import com.library.service.impl.UserProfileServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,7 +30,7 @@ public class UserProfileServiceTest {
     private UserProfileMapper userProfileMapper;
 
     @InjectMocks
-    private UserProfileService userProfileService;
+    private UserProfileServiceImpl userProfileService;
 
     private UserProfileDto userProfileDto;
     private UserProfile userProfile;

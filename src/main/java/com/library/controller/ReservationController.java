@@ -1,7 +1,7 @@
 package com.library.controller;
 
 import com.library.dto.ReservationDto;
-import com.library.service.ReservationService;
+import com.library.service.impl.ReservationServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReservationController {
 
-    private final ReservationService reservationService;
+    private final ReservationServiceImpl reservationService;
 
     @PostMapping
     public ResponseEntity<ReservationDto> addReservation(@Valid @RequestBody ReservationDto reservationDto) {

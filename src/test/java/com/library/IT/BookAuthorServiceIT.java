@@ -10,13 +10,10 @@ import com.library.mapper.BookMapper;
 import com.library.repository.BookAuthorRepository;
 import com.library.repository.BookRepository;
 import com.library.repository.AuthorRepository;
-import com.library.service.AuthorService;
-import com.library.service.BookAuthorService;
-import com.library.service.BookService;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import com.library.service.impl.AuthorServiceImpl;
+import com.library.service.impl.BookAuthorServiceImpl;
+import com.library.service.impl.BookServiceImpl;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -43,15 +40,15 @@ public class BookAuthorServiceIT {
     @Autowired
     private AuthorRepository authorRepository;
     @Autowired
-    private AuthorService authorService;
+    private AuthorServiceImpl authorService;
     @Autowired
     private AuthorMapper authorMapper;
     @Autowired
-    private BookService bookService;
+    private BookServiceImpl bookService;
     @Autowired
     private BookMapper bookMapper;
     @Autowired
-    private BookAuthorService bookAuthorService;
+    private BookAuthorServiceImpl bookAuthorService;
     @Autowired
     private BookAuthorRepository bookAuthorRepository;
 
@@ -66,6 +63,11 @@ public class BookAuthorServiceIT {
         System.setProperty("spring.datasource.url", postgres.getJdbcUrl());
         System.setProperty("spring.datasource.username", postgres.getUsername());
         System.setProperty("spring.datasource.password", postgres.getPassword());
+    }
+
+    @AfterAll
+    static void teardown() {
+        postgres.stop();
     }
 
     private AuthorDto createTestAuthor() {

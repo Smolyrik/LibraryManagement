@@ -1,7 +1,7 @@
 package com.library.controller;
 
 import com.library.dto.BookCategoryDto;
-import com.library.service.BookCategoryService;
+import com.library.service.impl.BookCategoryServiceImpl;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class BookCategoryController {
 
-    private final BookCategoryService bookCategoryService;
+    private final BookCategoryServiceImpl bookCategoryService;
 
     @PostMapping
     public ResponseEntity<BookCategoryDto> addBookCategory(@Valid @RequestBody BookCategoryDto bookCategoryDto) {

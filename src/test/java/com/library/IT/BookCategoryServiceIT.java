@@ -10,13 +10,10 @@ import com.library.mapper.CategoryMapper;
 import com.library.repository.BookCategoryRepository;
 import com.library.repository.BookRepository;
 import com.library.repository.CategoryRepository;
-import com.library.service.BookCategoryService;
-import com.library.service.BookService;
-import com.library.service.CategoryService;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import com.library.service.impl.BookCategoryServiceImpl;
+import com.library.service.impl.BookServiceImpl;
+import com.library.service.impl.CategoryServiceImpl;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -43,15 +40,15 @@ public class BookCategoryServiceIT {
     @Autowired
     private CategoryRepository categoryRepository;
     @Autowired
-    private CategoryService categoryService;
+    private CategoryServiceImpl categoryService;
     @Autowired
     private CategoryMapper categoryMapper;
     @Autowired
-    private BookService bookService;
+    private BookServiceImpl bookService;
     @Autowired
     private BookMapper bookMapper;
     @Autowired
-    private BookCategoryService bookCategoryService;
+    private BookCategoryServiceImpl bookCategoryService;
     @Autowired
     private BookCategoryRepository bookCategoryRepository;
 
@@ -85,6 +82,11 @@ public class BookCategoryServiceIT {
         System.setProperty("spring.datasource.url", postgres.getJdbcUrl());
         System.setProperty("spring.datasource.username", postgres.getUsername());
         System.setProperty("spring.datasource.password", postgres.getPassword());
+    }
+
+    @AfterAll
+    static void teardown() {
+        postgres.stop();
     }
 
     @AfterEach

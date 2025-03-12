@@ -1,7 +1,7 @@
 package com.library.controller;
 
 import com.library.dto.ReviewDto;
-import com.library.service.ReviewService;
+import com.library.service.impl.ReviewServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReviewController {
 
-    private final ReviewService reviewService;
+    private final ReviewServiceImpl reviewService;
 
     @PostMapping
     public ResponseEntity<ReviewDto> addReview(@Valid @RequestBody ReviewDto reviewDto) {

@@ -5,6 +5,7 @@ import com.library.entity.Role;
 import com.library.entity.User;
 import com.library.mapper.UserMapper;
 import com.library.repository.UserRepository;
+import com.library.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,7 +31,7 @@ public class UserServiceTest {
     private UserMapper userMapper;
 
     @InjectMocks
-    private UserService userService;
+    private UserServiceImpl userService;
 
     private UserDto userDto;
     private User user;

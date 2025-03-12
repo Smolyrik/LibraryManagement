@@ -1,7 +1,7 @@
 package com.library.controller;
 
 import com.library.dto.LoanDto;
-import com.library.service.LoanService;
+import com.library.service.impl.LoanServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LoanController {
 
-    private final LoanService loanService;
+    private final LoanServiceImpl loanService;
 
     @PostMapping
     public ResponseEntity<LoanDto> addLoan(@Valid @RequestBody LoanDto loanDto) {
