@@ -6,18 +6,9 @@ databaseChangeLog:
         - sqlFile:
             path: db/changelog/sql/1.0-create-tables.sql
 
-
   - changeSet:
-      id: 1.1-insert-data
+      id: 1.1-alter-user-columns
       author: Evgeniy Smolenskiy
       changes:
         - sqlFile:
-            path: db/changelog/sql/1.1-insert-data.sql
-
-
-  - changeSet:
-      id: 1.2-alter-user-columns
-      author: Evgeniy Smolenskiy
-      changes:
-        - sqlFile:
-            path: db/changelog/sql/1.2-alter-user-columns.sql
+            path: db/changelog/sql/1.1-alter-user-columns.sql

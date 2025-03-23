@@ -3,9 +3,9 @@ spring:
     name: "library"
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:tc:postgresql:16.0:///
-    username: test
-    password: test
+    url: jdbc:postgresql://localhost:5432/testlibrary
+    username: postgres
+    password: Password
   jpa:
     hibernate:
       ddl-auto: update
@@ -13,6 +13,8 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
+  security:
+
 
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yaml
