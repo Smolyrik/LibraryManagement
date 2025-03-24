@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class LoanController {
             }
     )
     @PostMapping
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<LoanDto> addLoan(@Valid @RequestBody LoanDto loanDto) {
         return ResponseEntity.ok(loanService.addLoan(loanDto));
     }
@@ -48,6 +50,7 @@ public class LoanController {
             }
     )
     @GetMapping("/{id}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<LoanDto> getLoanById(@PathVariable Integer id) {
         return ResponseEntity.ok(loanService.getLoanById(id));
     }
@@ -62,6 +65,7 @@ public class LoanController {
             }
     )
     @GetMapping
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<List<LoanDto>> getAllLoans() {
         return ResponseEntity.ok(loanService.getAllLoans());
     }
@@ -77,6 +81,7 @@ public class LoanController {
             }
     )
     @PutMapping("/{id}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<LoanDto> updateLoan(@PathVariable Integer id, @Valid @RequestBody LoanDto loanDto) {
         return ResponseEntity.ok(loanService.updateLoan(id, loanDto));
     }
@@ -91,6 +96,7 @@ public class LoanController {
             }
     )
     @DeleteMapping("/{id}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<Void> deleteLoan(@PathVariable Integer id) {
         loanService.deleteLoan(id);
         return ResponseEntity.noContent().build();
@@ -146,6 +152,7 @@ public class LoanController {
             }
     )
     @GetMapping("/overdue")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<List<LoanDto>> getOverdueLoans() {
         return ResponseEntity.ok(loanService.checkOverdueLoans());
     }

@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class BookController {
             }
     )
     @PostMapping
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<BookDto> addBook(@Valid @RequestBody BookDto bookDto) {
         return ResponseEntity.ok(bookService.addBook(bookDto));
     }
@@ -48,6 +50,7 @@ public class BookController {
             }
     )
     @GetMapping("/{id}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<BookDto> getBookById(@PathVariable Integer id) {
         return ResponseEntity.ok(bookService.getBookById(id));
     }
@@ -62,6 +65,7 @@ public class BookController {
             }
     )
     @GetMapping
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<List<BookDto>> getAllBooks() {
         return ResponseEntity.ok(bookService.getAllBooks());
     }
@@ -77,6 +81,7 @@ public class BookController {
             }
     )
     @PutMapping("/{id}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<BookDto> updateBook(@PathVariable Integer id, @Valid @RequestBody BookDto bookDto) {
         return ResponseEntity.ok(bookService.updateBook(id, bookDto));
     }
@@ -91,6 +96,7 @@ public class BookController {
             }
     )
     @DeleteMapping("/{id}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<Void> deleteBook(@PathVariable Integer id) {
         bookService.deleteBook(id);
         return ResponseEntity.noContent().build();

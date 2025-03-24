@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -62,6 +63,7 @@ public class UserProfileController {
             }
     )
     @GetMapping
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<List<UserProfileDto>> getAllUserProfiles() {
         return ResponseEntity.ok(userProfileService.getAllUserProfiles());
     }

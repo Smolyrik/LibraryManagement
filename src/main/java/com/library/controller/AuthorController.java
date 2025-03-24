@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,6 +32,7 @@ public class AuthorController {
                     @ApiResponse(responseCode = "400", description = "Invalid input")
             })
     @PostMapping
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<AuthorDto> addAuthor(@RequestBody AuthorDto authorDto) {
         return ResponseEntity.ok(authorService.addAuthor(authorDto));
     }
@@ -45,6 +47,7 @@ public class AuthorController {
                     @ApiResponse(responseCode = "404", description = "Author not found")
             })
     @GetMapping("/{id}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<AuthorDto> getAuthorById(@PathVariable Integer id) {
         return ResponseEntity.ok(authorService.getAuthorById(id));
     }
@@ -58,6 +61,7 @@ public class AuthorController {
                                     schema = @Schema(implementation = AuthorDto.class)))
             })
     @GetMapping
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<List<AuthorDto>> getAllAuthors() {
         return ResponseEntity.ok(authorService.getAllAuthors());
     }
@@ -73,6 +77,7 @@ public class AuthorController {
                     @ApiResponse(responseCode = "400", description = "Invalid input")
             })
     @PutMapping("/{id}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<AuthorDto> updateAuthor(@PathVariable Integer id, @RequestBody AuthorDto authorDto) {
         return ResponseEntity.ok(authorService.updateAuthor(id, authorDto));
     }
@@ -85,6 +90,7 @@ public class AuthorController {
                     @ApiResponse(responseCode = "404", description = "Author not found")
             })
     @DeleteMapping("/{id}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<Void> deleteAuthor(@PathVariable Integer id) {
         authorService.deleteAuthor(id);
         return ResponseEntity.noContent().build();

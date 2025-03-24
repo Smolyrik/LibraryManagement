@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,6 +35,7 @@ public class BookAuthorController {
             }
     )
     @PostMapping
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<BookAuthorDto> addBookAuthor(@Valid @RequestBody BookAuthorDto bookAuthorDto) {
         BookAuthorDto savedBookAuthor = bookAuthorService.addBookAuthor(bookAuthorDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBookAuthor);
@@ -50,6 +52,7 @@ public class BookAuthorController {
             }
     )
     @GetMapping("/{bookId}/{authorId}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<BookAuthorDto> getBookAuthorById(
             @Parameter(description = "ID of the book") @PathVariable Integer bookId,
             @Parameter(description = "ID of the author") @PathVariable Integer authorId) {
@@ -67,6 +70,7 @@ public class BookAuthorController {
             }
     )
     @GetMapping
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<List<BookAuthorDto>> getAllBookAuthors() {
         List<BookAuthorDto> bookAuthors = bookAuthorService.getAllBookAuthors();
         return ResponseEntity.ok(bookAuthors);
@@ -82,6 +86,7 @@ public class BookAuthorController {
             }
     )
     @DeleteMapping("/{bookId}/{authorId}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<Void> deleteBookAuthor(
             @Parameter(description = "ID of the book") @PathVariable Integer bookId,
             @Parameter(description = "ID of the author") @PathVariable Integer authorId) {

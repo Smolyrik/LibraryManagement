@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,6 +35,7 @@ public class BookCategoryController {
             }
     )
     @PostMapping
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<BookCategoryDto> addBookCategory(@Valid @RequestBody BookCategoryDto bookCategoryDto) {
         BookCategoryDto savedBookCategory = bookCategoryService.addBookCategory(bookCategoryDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBookCategory);
@@ -50,6 +52,7 @@ public class BookCategoryController {
             }
     )
     @GetMapping("/{bookId}/{categoryId}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<BookCategoryDto> getBookCategoryById(
             @Parameter(description = "ID of the book") @PathVariable Integer bookId,
             @Parameter(description = "ID of the category") @PathVariable Integer categoryId) {
@@ -67,6 +70,7 @@ public class BookCategoryController {
             }
     )
     @GetMapping
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<List<BookCategoryDto>> getAllBookCategories() {
         List<BookCategoryDto> bookCategories = bookCategoryService.getAllBookCategories();
         return ResponseEntity.ok(bookCategories);
@@ -82,6 +86,7 @@ public class BookCategoryController {
             }
     )
     @DeleteMapping("/{bookId}/{categoryId}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<Void> deleteBookCategory(
             @Parameter(description = "ID of the book") @PathVariable Integer bookId,
             @Parameter(description = "ID of the category") @PathVariable Integer categoryId) {

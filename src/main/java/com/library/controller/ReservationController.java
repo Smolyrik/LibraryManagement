@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class ReservationController {
             }
     )
     @PostMapping
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<ReservationDto> addReservation(@Valid @RequestBody ReservationDto reservationDto) {
         return ResponseEntity.ok(reservationService.addReservation(reservationDto));
     }
@@ -48,6 +50,7 @@ public class ReservationController {
             }
     )
     @GetMapping("/{id}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<ReservationDto> getReservationById(@PathVariable Integer id) {
         return ResponseEntity.ok(reservationService.getReservationById(id));
     }
@@ -62,6 +65,7 @@ public class ReservationController {
             }
     )
     @GetMapping
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<List<ReservationDto>> getAllReservations() {
         return ResponseEntity.ok(reservationService.getAllReservations());
     }
@@ -77,6 +81,7 @@ public class ReservationController {
             }
     )
     @PutMapping("/{id}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<ReservationDto> updateReservation(@PathVariable Integer id, @Valid @RequestBody ReservationDto reservationDto) {
         return ResponseEntity.ok(reservationService.updateReservation(id, reservationDto));
     }
@@ -91,6 +96,7 @@ public class ReservationController {
             }
     )
     @DeleteMapping("/{id}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<Void> deleteReservation(@PathVariable Integer id) {
         reservationService.deleteReservation(id);
         return ResponseEntity.noContent().build();
